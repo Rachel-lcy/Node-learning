@@ -3,9 +3,22 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
-
   //set header content type
   res.setHeader('Content-Type', 'text/html');
+  let path = './views/';
+  switch(req.url){
+    case './':
+      path += 'index.html';
+      break;
+    case '/about':
+      path += 'about.html';
+      break;
+    default:
+      path +='404.html';
+      break;
+  }
+
+
   //send an html file
   fs.readFile('./views/index.html', (err,data) => {
     if(err){
@@ -16,14 +29,10 @@ const server = http.createServer((req, res) => {
       res.end(data);
     }
   });
-
-
-
   // res.write('<p>Hello, Tia</p>');
   // res.write('<p>Hello Again, Tia</p>');
   // res.end();
 });
-
 server.listen(3000, 'localhost', () => {
   console.log('listening for requests on port 3000')
 });
