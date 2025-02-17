@@ -5,9 +5,10 @@ const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
   //set header content type
   res.setHeader('Content-Type', 'text/html');
+  // routing
   let path = './views/';
-  switch(req.url){
-    case './':
+  switch(req.url) {
+    case '/':
       path += 'index.html';
       res.statusCode = 200;
       break;
@@ -15,10 +16,14 @@ const server = http.createServer((req, res) => {
       path += 'about.html';
       res.statusCode = 200;
       break;
-    default:
-      path +='404.html';
-      res.statusCode = 404;
+    case '/about-me':
+      res.statusCode = 301;
+      res.setHeader('Location', '/about');
+      res.end();
       break;
+    default:
+      path += '404.html';
+      res.statusCode = 404;
   }
 
 
