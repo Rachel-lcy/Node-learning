@@ -9,7 +9,10 @@ app.set('view engine', 'ejs');
 
 //listen for requires
 app.listen(3000);
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
+
+//middleware & static files(css, images...)
+app.use(express.static('public'));
 
 // app.use((req,res,next) => {
 //   console.log('new request made:');
